@@ -1,5 +1,5 @@
 {
-  "name": "min-log",
+  "name": "minlog",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mdx-js/loader": "^2.3.0",
-    "@next/mdx": "^13.4.19",
-    "@types/node": "20.5.1",
+    "@types/node": "20.5.2",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
@@ -19,7 +17,7 @@
     "date-fns": "^2.30.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.19",
-    "next": "13.4.19",
+    "next": "^13.4.19",
     "next-contentlayer": "^0.3.4",
     "postcss": "8.4.28",
     "react": "18.2.0",

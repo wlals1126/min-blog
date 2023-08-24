@@ -1,53 +1,25 @@
-import {
-    defineDocumentType,
-    makeSource,
-  } from 'contentlayer/source-files';
-  import highlight from 'rehype-highlight';
-  import rehypePrettyCode from 'rehype-pretty-code';
-  
-  export const Post = defineDocumentType(() => ({
-    name: 'Post',
-    contentType: 'mdx',
-    filePathPattern: `**/*.mdx`,
-    fields: {
-      title: {
-        type: 'string',
-        required: true,
-      },
-      description: {
-        type: 'string',
-        required: true,
-      },
-      category: {
-        type: 'string',
-        required: true,
-      },
-      thumbnail: {
-        type: 'string',
-        required: false,
-      },
-      createdAt: {
-        type: 'date',
-        required: true,
-      },
+import { defineDocumentType, makeSource } from "contentlayer/source-files";
+
+export const Post = defineDocumentType(() => ({
+  name: "Post",
+  filePathPattern: `**/*.mdx`,
+  contentType:"mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
     },
-  }));
-  
-  const contentSource = makeSource({
-    contentDirPath: 'posts',
-    documentTypes: [Post],
-    mdx: {
-      remarkPlugins: [],
-      rehypePlugins: [
-        [
-          rehypePrettyCode,
-          {
-            theme: 'github-dark', 
-          },
-        ],
-        highlight,
-      ],
+    date: {
+      type: "date",
+      required: true,
     },
-  });
-  
-  export default contentSource;
+  },
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (post) => `/posts/${post._raw.flattenedPath}`,
+    },
+  },
+}));
+
+export default makeSource({ contentDirPath: "posts", documentTypes: [Post] });

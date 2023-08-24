@@ -1,16 +1,16 @@
-import { allPosts } from "@/.contentlayer/generated";
-import { compareDesc } from "date-fns";
+import { Post } from "@/.contentlayer/generated";
+import { format, parseISO } from "date-fns";
+import Link from "next/link";
 
-export default function Home() {
-  const posts = allPosts.sort((a, b) =>
-    compareDesc(new Date(a.date), new Date(b.date))
-  );
-
+export default function PostCard(post: Post): React.ReactElement {
   return (
-    <div>
-      {posts.map((post) => (
-        <h2 key={post._id}>{post.title}</h2>
-      ))}
+    <div className="mb-4 flex flex-col border-2 rounded-lg p-2">
+      <Link href={post.url} className="text-3xl mb-1 text-blue-500">
+        {post.title}
+      </Link>
+      <time dateTime={post.date}>
+        {format(parseISO(post.date), "LLLL d, yyyy")}
+      </time>
     </div>
   );
 }

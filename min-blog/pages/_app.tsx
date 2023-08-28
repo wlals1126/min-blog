@@ -8,7 +8,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 	return (
 		<>
 			<Head>
-				<title>유지민의 개발 블로그</title>
+				<title>Jimin`s Tech Blog</title>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />

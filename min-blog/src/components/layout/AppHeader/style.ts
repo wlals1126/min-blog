@@ -3,7 +3,7 @@ import { DefaultBox } from 'styles/default';
 
 export const HeaderContainer = styled.div`
 	width: 100%;
-	height: 40px;
+	height: 60px;
 	background: #fff;
 `;
 export const AppHeaderBox = styled(DefaultBox)`
@@ -12,7 +12,7 @@ export const AppHeaderBox = styled(DefaultBox)`
 
 	a {
 		img {
-			height: 20px;
+			height: 40px;
 			margin: 10px 0;
 		}
 	}

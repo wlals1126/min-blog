@@ -6,7 +6,7 @@ const AppHeader = () => {
 	return (
 		<a.HeaderContainer>
 			<a.AppHeaderBox>
-				<Link href="/">
+				<Link href="/" legacyBehavior>
 					<a>
 						<img src="avatar.svg" alt="blog_icon" />
 					</a>
@@ -15,7 +15,7 @@ const AppHeader = () => {
 					<a.HeaderButton>
 						<img src="" alt="posting_icon" />
 					</a.HeaderButton>
-					<Link href="">
+					<Link href="" legacyBehavior>	
 						<a.HeaderButton>
 							<img src="search.svg" alt="search_icon" />
 						</a.HeaderButton>

@@ -20,7 +20,7 @@ const AppFooter = () => {
 					zzzm1n126@gmail.com
 				</div>
 			</div>
-			<Link href="/test">
+			<Link href="/test" legacyBehavior>
 				<a>
 					<div />
 				</a>

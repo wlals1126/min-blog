@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import * as p from "./style";
-import { ICateroty } from "@/typings/data";
+import { UCategory } from "@/typings/data";
 import dayjs from "dayjs";
 
 interface PostProps {
@@ -10,9 +10,9 @@ interface PostProps {
     id: number;
     title: string;
     thumbnail: string | null;
-    discription: string;
-    createAt?: string;
-    categoryPosts: ICateroty[];
+    description: string;
+    createdAt?: string;
+    categoryPosts: UCategory[];
   };
 }
 
@@ -34,9 +34,9 @@ const PostCard = ({ post }: PostProps) => {
           <a>
             <h4>{post.title}</h4>
             <p className="date">
-              {dayjs(post.createAt).format("YYYY년 MM월 DD일")}
+              {dayjs(post.createdAt).format("YYYY년 MM월 DD일")}
             </p>
-            <p>{post.discription}</p>
+            <p>{post.description}</p>
           </a>
         </Link>
       </p.Contents>

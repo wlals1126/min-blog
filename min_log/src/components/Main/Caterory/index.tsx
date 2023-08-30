@@ -9,7 +9,7 @@ interface Props {
   current: boolean;
 }
 
-const PostCard = ({ page = "", name, num = 0, current }: Props) => {
+const CategoryBlock = ({ page = "", name, num = 0, current }: Props) => {
   return (
     <Link href={`/${page}${name === "전체글" ? "" : `cateroty=${name}`}`}>
       <p.Block current={current}>
@@ -19,4 +19,4 @@ const PostCard = ({ page = "", name, num = 0, current }: Props) => {
   );
 };
 
-export default PostCard;
+export default CategoryBlock;

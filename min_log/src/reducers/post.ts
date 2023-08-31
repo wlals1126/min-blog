@@ -1,107 +1,110 @@
-import { UPostState } from '@/typings/data';
+import { createAction, createReducer, createAsyncAction, ActionType } from 'typesafe-actions';
+import { UPost } from '@/typings/data';
+import { UPostState } from '@/typings/reducer';
+import { AxiosError, AxiosResponse } from 'axios';
 
-const initialState = {
+const initialState: UPostState = {
 	post: null,
-	isLoadingPost: false,
-	isWritingPost: false,
-	isRemovingPost: false,
-	writeErrorReason: '',
-	removeErrorReason: '',
+	linkedPosts: [],
+	writeSuccess: -1,
+	isEditedPost: false,
+	isRemovedPost: false,
+	loadErrorReason: null,
+	writeErrorReason: null,
+	removeErrorReason: null,
 };
 
-export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST';
-export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
-export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE';
+export const TOGGLE_CONFIRM_POST = 'post/TOGGLE_CONFIRM_POST';
 
-export const WRITE_POST_REQUEST = 'WRITE_POST_REQUEST';
-export const WRITE_POST_SUCCESS = 'WRITE_POST_SUCCESS';
-export const WRITE_POST_FAILURE = 'WRITE_POST_FAILURE';
+export const LOAD_POST_REQUEST = 'post/LOAD_POST_REQUEST';
+export const LOAD_POST_SUCCESS = 'post/LOAD_POST_SUCCESS';
+export const LOAD_POST_FAILURE = 'post/LOAD_POST_FAILURE';
 
-export const UPLOAD_IMAGE_REQUEST = 'UPLOAD_IMAGE_REQUEST';
-export const UPLOAD_IMAGE_SUCCESS = 'UPLOAD_IMAGE_SUCCESS';
-export const UPLOAD_IMAGE_FAILURE = 'UPLOAD_IMAGE_FAILURE';
+export const WRITE_POST_REQUEST = 'post/WRITE_POST_REQUEST';
+export const WRITE_POST_SUCCESS = 'post/WRITE_POST_SUCCESS';
+export const WRITE_POST_FAILURE = 'post/WRITE_POST_FAILURE';
 
-const postReducer = (state: UPostState = initialState, action: any) => {
-	switch (action.type) {
-		default: {
-			return { ...state };
-		}
-		case WRITE_POST_REQUEST: {
-			return {
-				...state,
-				isLoadingPost: true,
-			};
-		}
-		case WRITE_POST_REQUEST: {
-			return {
-				...state,
-				isLoadingPost: false,
-				post: dummyPost,
-			};
-		}
-		case WRITE_POST_REQUEST: {
-			return {
-				...state,
-				isLoadingPost: false,
-			};
-		}
-		case WRITE_POST_REQUEST: {
-			return {
-				...state,
-				isWritingPost: true,
-			};
-		}
-		case WRITE_POST_REQUEST: {
-			return {
-				...state,
-				isWritingPost: false,
-				post: action.data,
-			};
-		}
-		case WRITE_POST_REQUEST: {
-			return {
-				...state,
-				isWritingPost: false,
-			};
-		}
-	}
+export const REMOVE_POST_REQUEST = 'post/REMOVE_POST_REQUEST';
+export const REMOVE_POST_SUCCESS = 'post/REMOVE_POST_SUCCESS';
+export const REMOVE_POST_FAILURE = 'post/REMOVE_POST_FAILURE';
+
+export const UPLOAD_IMAGE_REQUEST = 'post/UPLOAD_IMAGE_REQUEST';
+export const UPLOAD_IMAGE_SUCCESS = 'post/UPLOAD_IMAGE_SUCCESS';
+export const UPLOAD_IMAGE_FAILURE = 'post/UPLOAD_IMAGE_FAILURE';
+
+export const toggleConfirmPost = createAction(TOGGLE_CONFIRM_POST)();
+
+export const loadPostAsync = createAsyncAction(LOAD_POST_REQUEST, LOAD_POST_SUCCESS, LOAD_POST_FAILURE)<
+	number,
+	AxiosResponse,
+	AxiosError
+>();
+
+export const writePostAsync = createAsyncAction(WRITE_POST_REQUEST, WRITE_POST_SUCCESS, WRITE_POST_FAILURE)<
+	UPost,
+	UPost,
+	AxiosError
+>();
+
+export const removePostAsync = createAsyncAction(REMOVE_POST_REQUEST, REMOVE_POST_SUCCESS, REMOVE_POST_FAILURE)<
+	number,
+	AxiosResponse,
+	AxiosError
+>();
+
+export const uploadImageAsync = createAsyncAction(UPLOAD_IMAGE_REQUEST, UPLOAD_IMAGE_SUCCESS, UPLOAD_IMAGE_FAILURE)<
+	FormData,
+	string,
+	AxiosError
+>();
+
+const actions = {
+	toggleConfirmPost,
+	loadPostAsync,
+	writePostAsync,
+	uploadImageAsync,
+	removePostAsync,
 };
+
+type PostAction = ActionType<typeof actions>;
+
+const postReducer = createReducer<UPostState, PostAction>(initialState, {
+	[LOAD_POST_REQUEST]: (state) => ({
+		...state,
+	}),
+	[LOAD_POST_SUCCESS]: (state, { payload: res }) => ({
+		...state,
+		post: res.data.post,
+		linkedPosts: res.data.categoryPosts,
+	}),
+	[LOAD_POST_FAILURE]: (state, { payload: error }) => ({
+		...state,
+		loadErrorReason: error.code === 'ECONNABORTED' ? 'timeout' : error.message,
+	}),
+	[WRITE_POST_REQUEST]: (state) => ({
+		...state,
+	}),
+	[WRITE_POST_SUCCESS]: (state, { payload: post }) => ({
+		...state,
+		post: post,
+		isEditedPost: post.isEdited ? true : false,
+		writeSuccess: post.id,
+	}),
+	[WRITE_POST_FAILURE]: (state, { payload: error }) => ({
+		...state,
+		writeErrorReason: error.message,
+	}),
+	[REMOVE_POST_REQUEST]: (state) => ({
+		...state,
+	}),
+	[REMOVE_POST_SUCCESS]: (state) => ({
+		...state,
+		isRemovedPost: true,
+	}),
+	[REMOVE_POST_FAILURE]: (state, { payload: error }) => ({
+		...state,
+		removeErrorReason: error.message,
+	}),
+});
 
 export default postReducer;
-
-
-const dummyPost = {
-  id: 1,
-  title: "블로그 제목입니다.",
-  createdAt: "2023년 8월 30일",
-  Category: [
-    {
-      id: 1,
-      name: "카테고리1",
-    },
-    {
-      id: 2,
-      name: "카테고리2",
-    },
-    {
-      id: 3,
-      name: "카테고리3",
-    },
-    {
-      id: 4,
-      name: "카테고리4",
-    },
-    {
-      id: 5,
-      name: "카테고리5",
-    },
-    {
-      id: 6,
-      name: "카테고리6",
-    },
-  ],
-  thumbnail: "https://i.ytimg.com/vi/y2YXl728YFg/maxresdefault.jpg",
-  description: "呪術廻戦  渋谷事変",
-  body: "# 뭔가 헤드를 여기 입력해야할 것만 같다.\n\
-        인생은 마치 계절과 같아요. 봄에는 새로운 시작과 기대로 가득 차 있을 때도 있지만, 때로는 어느새 더운 여름이 되어 스트레스와 불안이 느껴질 때도 있죠. 가을에는 변화와 이별의 감정이 느껴질 수 있고, 겨울에는 추운 바람에 힘들어할 때도 있어요. 하지만 그런 변화와 불편함도 결국은 지나가고, 다시 봄이 오듯이 행복과 평화가 찾아오는 법이죠. 우리의 감정과 상태도 이렇게 변화하며 흐르는 것이고, 그 모든 변화를 인생의 일부로 받아들이면 조금 더 평화로운 마음을 갖게 될 것입니다. ",
-};

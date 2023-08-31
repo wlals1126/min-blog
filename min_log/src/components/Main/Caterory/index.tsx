@@ -3,15 +3,15 @@ import Link from "next/link";
 import * as p from "./style";
 
 interface Props {
-  page: string;
+  pageRoot: string;
   name: string;
   num: number;
   current: boolean;
 }
 
-const CategoryBlock = ({ page = "", name, num = 0, current }: Props) => {
+const CategoryBlock = ({ pageRoot = "", name, num = 0, current }: Props) => {
   return (
-    <Link href={`/${page}${name === "전체글" ? "" : `cateroty=${name}`}`}>
+    <Link href={`/${pageRoot}${name === "전체글" ? "" : `cateroty=${name}`}`}>
       <p.Block current={current}>
         {name} ({num})
       </p.Block>

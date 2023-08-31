@@ -1,78 +1,79 @@
-import { UPostState } from "@/typings/data";
+import { UPostState } from '@/typings/data';
 
 const initialState = {
-  post: null,
-  isLoadingPost: false,
-  isWritingPost: false,
-  isRemovingPost: false,
-  writeErrorReason: "",
-  removeErrorReason: "",
+	post: null,
+	isLoadingPost: false,
+	isWritingPost: false,
+	isRemovingPost: false,
+	writeErrorReason: '',
+	removeErrorReason: '',
 };
 
-export const LOAD_POST_REQUEST = "LOAD_POST_REQUEST";
-export const LOAD_POST_SUCCESS = "LOAD_POST_SUCCESS";
-export const LOAD_POST_FAILURE = "LOAD_POST_FAILURE";
+export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST';
+export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS';
+export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE';
 
-export const WRITE_POST_REQUEST = "WRITE_POST_REQUEST";
-export const WRITE_POST_SUCCESS = "WRITE_POST_SUCCESS";
-export const WRITE_POST_FAILURE = "WRITE_POST_FAILURE";
+export const WRITE_POST_REQUEST = 'WRITE_POST_REQUEST';
+export const WRITE_POST_SUCCESS = 'WRITE_POST_SUCCESS';
+export const WRITE_POST_FAILURE = 'WRITE_POST_FAILURE';
 
-export const UPLOAD_IMAGE_REQUEST = "UPLOAD_IMAGE_REQUEST";
-export const UPLOAD_IMAGE_SUCCESS = "UPLOAD_IMAGE_SUCCESS";
-export const UPLOAD_IMAGE_FAILURE = "UPLOAD_IMAGE_FAILURE";
+export const UPLOAD_IMAGE_REQUEST = 'UPLOAD_IMAGE_REQUEST';
+export const UPLOAD_IMAGE_SUCCESS = 'UPLOAD_IMAGE_SUCCESS';
+export const UPLOAD_IMAGE_FAILURE = 'UPLOAD_IMAGE_FAILURE';
 
 const postReducer = (state: UPostState = initialState, action: any) => {
-  switch (action.type) {
-    default: {
-      return { ...state };
-    }
-    case WRITE_POST_REQUEST: {
-      return {
-        ...state,
-        isLoadingPost: true,
-      };
-    }
-    case WRITE_POST_REQUEST: {
-      return {
-        ...state,
-        isLoadingPost: false,
-        post: dummyPost,
-      };
-    }
-    case WRITE_POST_REQUEST: {
-      return {
-        ...state,
-        isLoadingPost: false,
-      };
-    }
-    case WRITE_POST_REQUEST: {
-      return {
-        ...state,
-        isWritingPost: true,
-      };
-    }
-    case WRITE_POST_REQUEST: {
-      return {
-        ...state,
-        isWritingPost: false,
-        post: action.data,
-      };
-    }
-    case WRITE_POST_REQUEST: {
-      return {
-        ...state,
-        isWritingPost: false,
-      };
-    }
-  }
+	switch (action.type) {
+		default: {
+			return { ...state };
+		}
+		case WRITE_POST_REQUEST: {
+			return {
+				...state,
+				isLoadingPost: true,
+			};
+		}
+		case WRITE_POST_REQUEST: {
+			return {
+				...state,
+				isLoadingPost: false,
+				post: dummyPost,
+			};
+		}
+		case WRITE_POST_REQUEST: {
+			return {
+				...state,
+				isLoadingPost: false,
+			};
+		}
+		case WRITE_POST_REQUEST: {
+			return {
+				...state,
+				isWritingPost: true,
+			};
+		}
+		case WRITE_POST_REQUEST: {
+			return {
+				...state,
+				isWritingPost: false,
+				post: action.data,
+			};
+		}
+		case WRITE_POST_REQUEST: {
+			return {
+				...state,
+				isWritingPost: false,
+			};
+		}
+	}
 };
 
 export default postReducer;
 
+
 const dummyPost = {
   id: 1,
   title: "블로그 제목입니다.",
-  createdAt: "2021년 2월 10일",
+  createdAt: "2023년 8월 30일",
   Category: [
     {
       id: 1,

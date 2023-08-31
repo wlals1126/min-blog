@@ -10,7 +10,7 @@ interface IndexProps {
 const Index = ({ category }: IndexProps) => {
   return (
     <MainContainer>
-      <HeadCategories category={category} pageRoot="" />
+      {/* <HeadCategories category={category} pageRoot="" /> */}
       <PostCards posts={null} />
     </MainContainer>
   );

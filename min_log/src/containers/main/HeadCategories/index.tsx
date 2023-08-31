@@ -41,7 +41,7 @@ const HeadCategories = ({ category, pageRoot }: HeadCategoriesProps) => {
           pageRoot={pageRoot}
           name={prev.name}
           num={prev.num}
-          current={category === prev.name}
+          current={category === prev.name}  
         />
       ))}
     </h.CategoryContainer>

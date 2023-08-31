@@ -27,6 +27,7 @@
     "redux": "^4.2.1",
     "redux-saga": "^1.2.3",
     "styled-components": "^6.0.7",
+    "typesafe-actions": "^5.1.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {

@@ -2,18 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import * as p from "./style";
-import { UCategory } from "@/typings/data";
+import { UCategory, UPost } from "@/typings/data";
 import dayjs from "dayjs";
 
 interface PostProps {
-  post: {
-    id: number;
-    title: string;
-    thumbnail: string | null;
-    description: string;
-    createdAt?: string;
-    categoryPosts: UCategory[];
-  };
+  post: UPost;
 }
 
 const PostCard = ({ post }: PostProps) => {

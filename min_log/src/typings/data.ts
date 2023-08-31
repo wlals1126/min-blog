@@ -1,4 +1,5 @@
 export interface UCategory {
+  postCount: number;
 	id: number;
 	name: string;
 	num?: number;

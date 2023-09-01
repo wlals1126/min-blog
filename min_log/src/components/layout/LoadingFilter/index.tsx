@@ -1,7 +1,8 @@
 import React from "react";
 import * as l from "./style";
+import { Background, LoadingBalls } from "./style";
 
-export const LoadingFilter = () => {
+export const LoadingBall = () => {
   return (
     <l.Background>
       <l.LoadingBalls>
@@ -12,6 +13,14 @@ export const LoadingFilter = () => {
         </div>
       </l.LoadingBalls>
     </l.Background>
+  );
+};
+
+const LoadingFilter = () => {
+  return (
+    <Background>
+      <LoadingBalls />
+    </Background>
   );
 };
 

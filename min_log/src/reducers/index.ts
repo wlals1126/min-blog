@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { HYDRATE } from 'next-redux-wrapper';
-
 import loading from './loading';
 import posts from './posts';
 import post from './post';

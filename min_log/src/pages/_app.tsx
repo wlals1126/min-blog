@@ -3,11 +3,15 @@ import React from "react";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import Layout from "@/containers/share/Layout";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import { GlobalStyles } from "@/styles/default";
+import rootReducer from "@/reducers";
 
 const App = ({ Component, pageProps }: AppProps) => {
+  const store = createStore(rootReducer);
   return (
-    <>
+    <Provider store={store}>
       <Head>
         <title>Jimin`s Tech Blog</title>
         <meta charSet="utf-8" />
@@ -32,7 +36,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       <Layout>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </Provider>
   );
 };
 

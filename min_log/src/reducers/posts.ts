@@ -1,131 +1,117 @@
-import { UPostsState } from "@/typings/data";
+import { createReducer, createAsyncAction, ActionType } from "typesafe-actions";
+import { UPost, UUser, UCategory } from "@/typings/data";
+import { UPostsState } from "@/typings/reducer";
+import { AxiosError, AxiosResponse } from "axios";
 
-const dummyPost = [
-  {
-    id: 1,
-    thumbnail: "",
-    title: "포스트 제목",
-    description:
-      "인생은 마치 계절과 같아요. 봄에는 새로운 시작과 기대로 가득 차 있을 때도 있지만, 때로는 어느새 더운 여름이 되어 스트레스와 불안이 느껴질 때도 있죠.",
-    createAt: "2023년 8월 30일",
-    Category: [
-      {
-        id: 1,
-        name: "카테고리1",
-        num: 1,
-      },
-      {
-        id: 2,
-        name: "카테고리2",
-        num: 1,
-      },
-    ],
-  },
-  {
-    id: 2,
-    thumbnail:
-      "https://media.vlpt.us/images/minsgy/post/8e1e5456-4a4b-4d42-b4bd-29040fc879bc/about_img.png",
-    title: "포스트 제목",
-    description:
-      "인생은 마치 계절과 같아요. 봄에는 새로운 시작과 기대로 가득 차 있을 때도 있지만, 때로는 어느새 더운 여름이 되어 스트레스와 불안이 느껴질 때도 있죠.",
-
-    createAt: "2023년 8월 30일",
-    Category: [
-      {
-        id: 1,
-        name: "카테고리1",
-        num: 1,
-      },
-      {
-        id: 2,
-        name: "카테고리2",
-        num: 1,
-      },
-    ],
-  },
-  {
-    id: 3,
-    thumbnail:
-      "https://media.vlpt.us/images/minsgy/post/8e1e5456-4a4b-4d42-b4bd-29040fc879bc/about_img.png",
-    title: "포스트 제목",
-    description:
-      "인생은 마치 계절과 같아요. 봄에는 새로운 시작과 기대로 가득 차 있을 때도 있지만, 때로는 어느새 더운 여름이 되어 스트레스와 불안이 느껴질 때도 있죠.",
-
-    createAt: "2023년 8월 30일",
-    Category: [
-      {
-        id: 1,
-        name: "카테고리1",
-        num: 1,
-      },
-      {
-        id: 2,
-        name: "카테고리2",
-        num: 1,
-      },
-    ],
-  },
-  {
-    id: 4,
-    thumbnail:
-      "https://media.vlpt.us/images/minsgy/post/8e1e5456-4a4b-4d42-b4bd-29040fc879bc/about_img.png",
-    title: "포스트 제목",
-    description:
-      "인생은 마치 계절과 같아요. 봄에는 새로운 시작과 기대로 가득 차 있을 때도 있지만, 때로는 어느새 더운 여름이 되어 스트레스와 불안이 느껴질 때도 있죠.",
-
-    createAt: "2023년 8월 30일",
-    Category: [
-      {
-        id: 1,
-        name: "카테고리1",
-        num: 1,
-      },
-      {
-        id: 2,
-        name: "카테고리2",
-        num: 1,
-      },
-    ],
-  },
-];
-
-const initialState = {
-	posts: [],
-	isLoaddingPosts: false,
-	isLoadedPosts: false,
-	loadPostsErrorReason: '',
+const initialState: UPostsState = {
+  Category: [],
+  posts: [],
+  numberOfPosts: 0,
+  isLoaddingPosts: false,
+  loadPostsErrorReason: null,
+  EndOfPosts: false,
+  findPostCount: 0,
 };
 
-export const LOAD_POSTS_REQUEST = 'LOAD_POSTS_REQUEST';
-export const LOAD_POSTS_SUCCESS = 'LOAD_POSTS_SUCCESS';
-export const LOAD_POSTS_FAILURE = 'LOAD_POSTS_FAILURE';
+export const LOAD_POSTS_REQUEST = "posts/LOAD_POSTS_REQUEST";
+export const LOAD_POSTS_SUCCESS = "posts/LOAD_POSTS_SUCCESS";
+export const LOAD_POSTS_FAILURE = "posts/LOAD_POSTS_FAILURE";
 
-const postsReducer = (state: UPostsState = initialState, action: any) => {
-	switch (action.type) {
-		default: {
-			return { ...state };
-		}
-		case LOAD_POSTS_REQUEST: {
-			return {
-				...state,
-				isLoaddingPosts: true,
-			};
-		}
-		case LOAD_POSTS_SUCCESS: {
-			return {
-				...state,
-				isLoaddingPosts: false,
-				posts: [...dummyPost],
-			};
-		}
-		case LOAD_POSTS_FAILURE: {
-			return {
-				...state,
-				isLoaddingPosts: false,
-				loadPostsErrorReason: '불러오기 실패',
-			};
-		}
-	}
+export const LOAD_CATEGORIES_REQUEST = "posts/LOAD_CATEGORIES_REQUEST";
+export const LOAD_CATEGORIES_SUCCESS = "posts/LOAD_CATEGORIES_SUCCESS";
+export const LOAD_CATEGORIES_FAILURE = "posts/LOAD_CATEGORIES_FAILURE";
+
+export const LOAD_SEARCH_REQUEST = "posts/LOAD_SEARCH_REQUEST";
+export const LOAD_SEARCH_SUCCESS = "posts/LOAD_SEARCH_SUCCESS";
+export const LOAD_SEARCH_FAILURE = "posts/LOAD_SEARCH_FAILURE";
+
+interface loadPostRequestPayload {
+  category?: string;
+  search?: string;
+  lastId?: number;
+}
+
+export const loadPostsAsync = createAsyncAction(
+  LOAD_POSTS_REQUEST,
+  LOAD_POSTS_SUCCESS,
+  LOAD_POSTS_FAILURE
+)<loadPostRequestPayload, AxiosResponse<UPost[]>, AxiosError>();
+
+interface ISearchPostsPayload {
+  posts: UPost[];
+  findPostCount: number;
+}
+
+export const searchPostsAsync = createAsyncAction(
+  LOAD_SEARCH_REQUEST,
+  LOAD_SEARCH_SUCCESS,
+  LOAD_SEARCH_FAILURE
+)<loadPostRequestPayload, AxiosResponse<ISearchPostsPayload>, AxiosError>();
+
+interface LoadCategoryType {
+  categories: UCategory[] & { postCount: number }[];
+  numberOfPosts: number;
+}
+
+export const loadCategoriesAsync = createAsyncAction(
+  LOAD_CATEGORIES_REQUEST,
+  LOAD_CATEGORIES_SUCCESS,
+  LOAD_CATEGORIES_FAILURE
+)<null, AxiosResponse<LoadCategoryType>, AxiosError>();
+
+const actions = {
+  loadPostsAsync,
+  loadCategoriesAsync,
+  searchPostsAsync,
 };
+
+type PostsAction = ActionType<typeof actions>;
+
+const postsReducer = createReducer<UPostsState, PostsAction>(initialState, {
+  [LOAD_POSTS_REQUEST]: (state) => ({
+    ...state,
+    isLoaddingPosts: true,
+  }),
+  [LOAD_POSTS_SUCCESS]: (state, { payload }) => ({
+    ...state,
+    isLoaddingPosts: false,
+    posts: state.posts.concat(payload.data),
+    EndOfPosts: payload.data.length !== 8,
+  }),
+  [LOAD_POSTS_FAILURE]: (state, { payload: error }) => ({
+    ...state,
+    isLoaddingPosts: false,
+    loadPostsErrorReason:
+      error.code === "ECONNABORTED" ? "timeout" : error.message,
+  }),
+  [LOAD_SEARCH_REQUEST]: (state) => ({
+    ...state,
+    isLoaddingPosts: true,
+  }),
+  [LOAD_SEARCH_SUCCESS]: (state, { payload }) => ({
+    ...state,
+    isLoaddingPosts: false,
+    posts: state.posts.concat(payload.data.posts),
+    findPostCount: payload.data.findPostCount,
+    EndOfPosts: payload.data.posts.length !== 8,
+  }),
+  [LOAD_SEARCH_FAILURE]: (state, { payload: error }) => ({
+    ...state,
+    isLoaddingPosts: false,
+    loadPostsErrorReason:
+      error.code === "ECONNABORTED" ? "timeout" : error.message,
+  }),
+  [LOAD_CATEGORIES_REQUEST]: (state) => ({
+    ...state,
+  }),
+  [LOAD_CATEGORIES_SUCCESS]: (state, { payload }) => ({
+    ...state,
+    Category: payload.data.categories,
+    numberOfPosts: payload.data.numberOfPosts,
+  }),
+  [LOAD_CATEGORIES_FAILURE]: (state, { payload: error }) => ({
+    ...state,
+  }),
+});
 
 export default postsReducer;

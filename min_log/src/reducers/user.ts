@@ -1,68 +1,65 @@
-import { UUserState } from '@/typings/data';
+import { ULogin, UUser } from "@/typings/data";
+import { UUserState } from "@/typings/reducer";
+import { AxiosError } from "axios";
+import { createAsyncAction, createReducer, ActionType } from "typesafe-actions";
 
 const initialState = {
-	user: null,
-	isLoggedIn: false,
-	isLoggingIn: false,
-	isLoggingOut: false,
-	loginErrorReason: '',
+  user: null,
+  loginErrorReason: "",
 };
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
+export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
+export const LOAD_USER_FAILURE = "LOAD_USER_FAILURE";
 
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+export const LOGIN_REQUEST = "LOGIN_REQUEST";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
-const userReducer = (state: UUserState = initialState, action: any) => {
-	switch (action.type) {
-		default: {
-			return { ...state };
-		}
-		case LOGIN_REQUEST: {
-			return {
-				...state,
-				isLoggingIn: true,
-			};
-		}
-		case LOGIN_SUCCESS: {
-			return {
-				...state,
-				isLoggingIn: false,
-				isLoggedIn: true,
-			};
-		}
-		case LOGIN_FAILURE: {
-			return {
-				...state,
-				isLoggingIn: false,
-				loginErrorReason: '로그인 실패',
-			};
-		}
+export const loginAsync = createAsyncAction(
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE
+)<ULogin, UUser, AxiosError>();
 
-		case LOGOUT_REQUEST: {
-			return {
-				...state,
-				isLoggingOut: true,
-			};
-		}
-		case LOGOUT_SUCCESS: {
-			return {
-				...state,
-				isLoggingOut: false,
-				user: null,
-			};
-		}
-		case LOGOUT_FAILURE: {
-			return {
-				...state,
-				isLoggingOut: false,
-				loginErrorReason: '로그아웃 실패',
-			};
-		}
-	}
+export const loadUserAsync = createAsyncAction(
+  LOAD_USER_REQUEST,
+  LOAD_USER_SUCCESS,
+  LOAD_USER_FAILURE
+)<ULogin, UUser, AxiosError>();
+
+const actions = {
+  loginAsync,
+  loadUserAsync,
 };
+
+type UserAction = ActionType<typeof actions>;
+
+const userReducer = createReducer<UUserState, UserAction>(initialState, {
+  [LOGIN_REQUEST]: (state) => ({
+    ...state,
+  }),
+  [LOGIN_SUCCESS]: (state, { payload: user }) => ({
+    ...state,
+    user: user,
+  }),
+  [LOGIN_FAILURE]: (state, { payload: error }) => ({
+    ...state,
+    user: null,
+    loginErrorReason: error.message,
+  }),
+  [LOAD_USER_REQUEST]: (state) => ({
+    ...state,
+  }),
+  [LOAD_USER_SUCCESS]: (state, { payload: user }) => ({
+    ...state,
+    user: user,
+  }),
+  [LOAD_USER_FAILURE]: (state, { payload: error }) => ({
+    ...state,
+    loginErrorReason: error.message,
+    user: null,
+  }),
+});
 
 export default userReducer;

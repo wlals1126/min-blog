@@ -1,9 +1,4 @@
-import {
-  createAction,
-  createReducer,
-  ActionType,
-  action,
-} from "typesafe-actions";
+import { createAction, createReducer, ActionType } from "typesafe-actions";
 import { UCategory } from "@/typings/data";
 
 interface PostingState {

@@ -13,7 +13,7 @@ const PostCard = ({ post }: PostProps) => {
   return (
     <p.PostCard>
       {post.thumbnail && (
-        <Link href={`/post/{post.id}`}>
+        <Link href={`/post/{post.id}`} legacyBehavior>
           <p.Thumbnail>
             <>
               <div />
@@ -23,7 +23,7 @@ const PostCard = ({ post }: PostProps) => {
         </Link>
       )}
       <p.Contents thumbnail={post.thumbnail ? true : false}>
-        <Link href={`/post/{post.id}`}>
+        <Link href={`/post/{post.id}`} legacyBehavior>
           <a>
             <h4>{post.title}</h4>
             <p className="date">

@@ -11,7 +11,10 @@ interface Props {
 
 const CategoryBlock = ({ pageRoot = "", name, num = 0, current }: Props) => {
   return (
-    <Link href={`/${pageRoot}${name === "전체글" ? "" : `cateroty=${name}`}`}>
+    <Link
+      href={`/${pageRoot}${name === "전체글" ? "" : `cateroty=${name}`}`}
+      legacyBehavior
+    >
       <p.Block current={current}>
         {name} ({num})
       </p.Block>

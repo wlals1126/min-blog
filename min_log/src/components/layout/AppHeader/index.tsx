@@ -26,11 +26,8 @@ const AppHeader = () => {
           <a.HeaderButton target="_blank" href="https://github.com/wlals1126">
             <img src="/github.svg" alt="github_link_button_img" />
           </a.HeaderButton>
-          <a.HeaderButton
-            href="https://www.notion.so/52e2cb003c0d4ca7959a487b7a18db15?pvs=4"
-            target="_blank"
-          >
-            <img src="Notion-logo.svg" alt="fortpolio_link_button" />
+          <a.HeaderButton href="/login" target="_blank">
+            <img src="login.svg" alt="fortpolio_link_button" />
           </a.HeaderButton>
         </a.HeaderButtonBox>
       </a.AppHeaderBox>

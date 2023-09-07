@@ -13,6 +13,7 @@ const AppFooter = () => {
         </a>
         <a href="" target="_blank">
           <img src="" alt="about_icon" />
+          about
         </a>
         <div>
           <div>

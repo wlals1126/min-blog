@@ -2,8 +2,11 @@
 import React from "react";
 import Link from "next/link";
 import * as a from "./style";
+import { useSelector } from "react-redux";
+import { RootState } from "@/reducers";
 
 const AppHeader = () => {
+  const { user } = useSelector((state: RootState) => state.user);
   return (
     <a.HeaderContainer>
       <a.AppHeaderBox>
@@ -13,11 +16,18 @@ const AppHeader = () => {
           </a>
         </Link>
         <a.HeaderButtonBox>
-          <a.HeaderButton>
+          {user && (
+            <Link href="/posting">
+              <a.HeaderButton>
+                <img src="/pen.svg" alt="error" />
+              </a.HeaderButton>
+            </Link>
+          )}
+          {/* <a.HeaderButton>
             <Link href="https://m1n-log.vercel.app/" legacyBehavior>
               <img src="social.png" alt="posting_icon" />
             </Link>
-          </a.HeaderButton>
+          </a.HeaderButton> */}
           <Link href="/search" legacyBehavior>
             <a.HeaderButton>
               <img src="search.svg" alt="search_icon" />

@@ -41,7 +41,12 @@ const Login = () => {
             <div>
               <label>
                 아이디
-                <input type="text" value={username} onChange={setUsername} />
+                <input
+                  type="text"
+                  placeholder="아이디를 입력해주세요"
+                  value={username}
+                  onChange={setUsername}
+                />
               </label>
             </div>
             <div>
@@ -49,6 +54,7 @@ const Login = () => {
                 비밀번호
                 <input
                   type="password"
+                  placeholder="비밀번호를 입력해주세요"
                   autoComplete="off"
                   value={password}
                   onChange={setPassword}

@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import styled from 'styled-components';
+import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 	body {
@@ -58,16 +58,22 @@ export const GlobalStyles = createGlobalStyle`
 `;
 
 export const DefaultBox = styled.div`
-	width: 100%;
-	height: 100%;
-	max-width: 1320px;
-	margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
 
-	@media screen and (max-width: 1320px) {
-		max-width: 1000px;
-	}
+  @media screen and (max-width: 1320px) {
+    max-width: 1000px;
+  }
 
-	@media screen and (max-width: 700px) {
-		max-width: 660px;
-	}
+  @media screen and (max-width: 700px) {
+    max-width: 660px;
+  }
+`;
+
+export const DateP = styled.p`
+  font-size: 12px;
+  color: #495057;
+  line-height: 1.5;
 `;

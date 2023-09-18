@@ -13,7 +13,7 @@ interface Props {
   post: UPost | null;
 }
 
-const ComfirmPost = ({ title, post }: Props) => {
+const ConfirmPost = ({ title, post }: Props) => {
   const { body, isOpen, categories, isEditingId } = useSelector(
     (state: RootState) => state.post
   );
@@ -124,4 +124,4 @@ const ComfirmPost = ({ title, post }: Props) => {
   );
 };
 
-export default c.ConfirmPage;
+export default ConfirmPost;

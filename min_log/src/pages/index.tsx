@@ -2,12 +2,17 @@ import React, { useEffect } from "react";
 import { MainContainer } from "@/styles/Main";
 import HeadCategories from "@/containers/main/HeadCategories";
 import PostCards from "@/containers/main/PostCards";
+import wrapper from "@/store/configureStore";
+import { LOAD_CATEGORIES_REQUEST, LOAD_POSTS_REQUEST } from "@/reducers/posts";
+import { LOAD_USER_REQUEST } from "@/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { LOAD_POST_REQUEST } from "@/reducers/post";
 import Head from "next/head";
+import axios from "axios";
 import Error from "next/error";
 import { LoadingBall } from "@/components/layout/LoadingFilter";
+
 
 interface IndexProps {
   category: string;

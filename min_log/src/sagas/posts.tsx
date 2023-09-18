@@ -6,7 +6,9 @@ async function loadAllPostsAPI(query: any) {
   return await axios.get(`/post`);
 }
 
-function* loadAllPosts(action: ReturnType<typeof loadPostsAsync.request>) {
+function* loadAllPosts(
+  action: ReturnType<typeof loadPostsAsync.request>
+): Generator<any, void, any> {
   try {
     const result = yield call(loadAllPostsAPI, action.payload);
     yield put(loadPostsAsync.success(result.data));

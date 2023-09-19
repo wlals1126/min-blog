@@ -12,7 +12,6 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import LoadingFilter from "@/components/layout/LoadingFilter";
 import DropImage from "@/components/write/DropImg";
-import wrapper from "@/store/configureStore";
 
 interface Props {
   post: UPost | null;

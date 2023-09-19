@@ -90,5 +90,4 @@ const Posting = ({ post }: Props) => {
   );
 };
 
-
 export default Posting;

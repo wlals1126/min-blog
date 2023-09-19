@@ -1,6 +1,6 @@
 import { loadingEnd, loadingStart } from "@/reducers/loading";
 import {
-  LOAD_USER_REQUEST,
+    LOAD_USER_REQUSET,
   LOGIN_REQUEST,
   loadUserAsync,
   loginAsync,
@@ -30,7 +30,7 @@ function* loadUser() {
 }
 
 function* watchLoadUser() {
-  yield takeEvery(LOAD_USER_REQUEST, loadUser);
+  yield takeEvery(LOAD_USER_REQUSET, loadUser);
 }
 
 async function loginAPI(loginData: any) {

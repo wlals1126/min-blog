@@ -10,8 +10,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { END } from "redux-saga";
 import LoadingFilter from "@/components/layout/LoadingFilter";
 import DropImage from "@/components/write/DropImg";
+import wrapper from "@/store/configureStore";
 
 interface Props {
   post: UPost | null;
@@ -88,5 +90,7 @@ const Posting = ({ post }: Props) => {
     </>
   );
 };
+
+export const getServrSideProps = wrapper.getServerSideProps
 
 export default Posting;

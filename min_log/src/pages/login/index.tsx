@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import * as l from "./style";
 import useInput from "@/hooks/useInput";
-import { LOGIN_REQUEST } from "@/reducers/user";
+import { LOAD_USER_REQUSET, LOGIN_REQUEST } from "@/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { useRouter } from "next/router";

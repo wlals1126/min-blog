@@ -91,6 +91,4 @@ const Posting = ({ post }: Props) => {
   );
 };
 
-export const getServrSideProps = wrapper.getServerSideProps
-
 export default Posting;

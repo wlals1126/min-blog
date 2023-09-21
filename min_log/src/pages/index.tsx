@@ -87,27 +87,4 @@ const Index = ({ category }: IndexProps) => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
-	const cookie = context.req ? context.req.headers.cookie : '';
-	axios.defaults.headers.Cookie = '';
-	if (context.req && cookie) {
-		axios.defaults.headers.Cookie = cookie;
-	}
-	context.store.dispatch({
-		type: LOAD_USER_REQUSET,
-	});
-	context.store.dispatch({
-		type: LOAD_CATEGORIES_REQUEST,
-	});
-	context.store.dispatch({
-		type: LOAD_POSTS_REQUEST,
-		payload: {
-			category: context.query.category,
-		},
-	}); 
-	context.store.dispatch(END);
-	await context.store.sagaTask.toPromise();
-	return { props: { category: context.query.category ? context.query.category : '' } };
-});
-
 export default Index;

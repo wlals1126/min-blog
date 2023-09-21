@@ -4,7 +4,6 @@ import HeadCategories from "@/containers/main/HeadCategories";
 import PostCards from "@/containers/main/PostCards";
 import wrapper from "@/store/configureStore";
 import { LOAD_CATEGORIES_REQUEST, LOAD_POSTS_REQUEST } from "@/reducers/posts";
-import { LOAD_USER_REQUEST } from "@/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { LOAD_POST_REQUEST } from "@/reducers/post";
@@ -12,6 +11,8 @@ import Head from "next/head";
 import axios from "axios";
 import Error from "next/error";
 import { LoadingBall } from "@/components/layout/LoadingFilter";
+import { LOAD_USER_REQUSET } from "@/reducers/user";
+import { END } from "redux-saga";
 
 
 interface IndexProps {
@@ -85,5 +86,28 @@ const Index = ({ category }: IndexProps) => {
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+	const cookie = context.req ? context.req.headers.cookie : '';
+	axios.defaults.headers.Cookie = '';
+	if (context.req && cookie) {
+		axios.defaults.headers.Cookie = cookie;
+	}
+	context.store.dispatch({
+		type: LOAD_USER_REQUSET,
+	});
+	context.store.dispatch({
+		type: LOAD_CATEGORIES_REQUEST,
+	});
+	context.store.dispatch({
+		type: LOAD_POSTS_REQUEST,
+		payload: {
+			category: context.query.category,
+		},
+	}); 
+	context.store.dispatch(END);
+	await context.store.sagaTask.toPromise();
+	return { props: { category: context.query.category ? context.query.category : '' } };
+});
 
 export default Index;

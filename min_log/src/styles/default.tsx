@@ -57,6 +57,11 @@ export const GlobalStyles = createGlobalStyle`
 	}
 `;
 
+export const WidthDiv = styled.div`
+	width: 100%;
+	background: #fff;
+`;
+
 export const DefaultBox = styled.div`
   width: 100%;
   height: 100%;
@@ -70,6 +75,12 @@ export const DefaultBox = styled.div`
   @media screen and (max-width: 700px) {
     max-width: 660px;
   }
+`;
+
+export const DisplayDiv = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const DateP = styled.p`

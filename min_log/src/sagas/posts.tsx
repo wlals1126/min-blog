@@ -1,12 +1,11 @@
-import { loadingEnd, loadingStart } from "@/reducers/loading";
-import { loadPostAsync } from "@/reducers/post";
 import {
   loadCategoriesAsync,
   loadPostsAsync,
   searchPostsAsync,
 } from "@/reducers/posts";
-import axios, { AxiosResponse, all } from "axios";
-import { put, call, takeLatest, fork } from "redux-saga/effects";
+import axios, { AxiosResponse } from "axios";
+import { call, all, fork, takeLatest, put } from "redux-saga/effects";
+import { loadingEnd, loadingStart } from "@/reducers/loading";
 
 async function loadCategoriesAPI() {
   return await axios.get(`/category`, { timeout: 3000 });
@@ -17,9 +16,9 @@ function* loadCategories(
 ) {
   try {
     const result: AxiosResponse<any> = yield call(loadCategoriesAPI);
-    yield put(loadCategoriesAsync.success(result.data));
+    yield put(loadCategoriesAsync.success(result));
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
     yield put(loadCategoriesAsync.failure(error));
   }
 }
@@ -28,9 +27,9 @@ function* watchloadCategories() {
   yield takeLatest(loadCategoriesAsync.request, loadCategories);
 }
 
-async function searchPostAPI(query: any) {
+async function searchPostsAPI(query: any) {
   return await axios.get(
-    `/post/search?lastId=${query.lastId || 0}&sarch=${encodeURIComponent(
+    `/post/search?lastId=${query.lastId || 0}&search=${encodeURIComponent(
       query.search
     )}`,
     {
@@ -39,23 +38,23 @@ async function searchPostAPI(query: any) {
   );
 }
 
-function* saerchPost(action: ReturnType<typeof searchPostsAsync.request>) {
+function* searchPosts(action: ReturnType<typeof searchPostsAsync.request>) {
   yield put(loadingStart(action.type));
   try {
     const result: AxiosResponse<any> = yield call(
-      searchPostAPI,
+      searchPostsAPI,
       action.payload
     );
-    yield put(searchPostsAsync.success(result.data));
+    yield put(searchPostsAsync.success(result));
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
     yield put(searchPostsAsync.failure(error));
   }
   yield put(loadingEnd(action.type));
 }
 
-function* watchSaerchPosts() {
-  yield takeLatest(searchPostsAsync.request, saerchPost);
+function* watchSearchPosts() {
+  yield takeLatest(searchPostsAsync.request, searchPosts);
 }
 
 async function loadAllPostsAPI(query: any) {
@@ -90,6 +89,6 @@ export default function* postsSaga() {
   yield all([
     fork(watchloadCategories),
     fork(watchLoadAllPosts),
-    fork(watchSaerchPosts),
+    fork(watchSearchPosts),
   ]);
 }

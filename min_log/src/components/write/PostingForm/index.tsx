@@ -29,7 +29,7 @@ const PostingForm = ({
   const [categories, setCategories] = useState(category);
 
   const submitToConfirm = useCallback(
-    (title: any, isEditingId: any, body: any, categories: any) => {
+    (title: string, isEditingId: number, body: string, categories: UCategory[]) => {
       if (!(title && body)) {
         alert("포스트 제목과 내용을 입력해주셔야합니다.");
         return;

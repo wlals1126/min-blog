@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Link from "next/link";
 import * as a from "./style";
@@ -23,11 +22,6 @@ const AppHeader = () => {
               </a.HeaderButton>
             </Link>
           )}
-          {/* <a.HeaderButton>
-            <Link href="https://m1n-log.vercel.app/" legacyBehavior>
-              <img src="social.png" alt="posting_icon" />
-            </Link>
-          </a.HeaderButton> */}
           <Link href="/search" legacyBehavior>
             <a.HeaderButton>
               <img src="search.svg" alt="search_icon" />

@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React from "react";
 import * as a from "./style";
@@ -9,7 +8,7 @@ const AppFooter = () => {
       <div>
         <a href="https://github.com/wlals1126" target="_blank">
           <img src="/github.svg" alt="github_icon" />
-          MinLog
+          Yu JiMin
         </a>
         <a href="" target="_blank">
           <img src="" alt="about_icon" />

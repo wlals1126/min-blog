@@ -15,7 +15,7 @@ const AppHeader = () => {
           </a>
         </Link>
         <a.HeaderButtonBox>
-            <Link href="/posting">
+            <Link href="/posting" legacyBehavior>
               <a.HeaderButton>
                 <img src="/pen.svg" alt="error" />
               </a.HeaderButton>

@@ -11,7 +11,7 @@ interface Props {
 
 const Bar = ({ post }: Props) => {
   return (
-    <Link href={`posting/${post.id}`}>
+    <Link href={`posting/${post.id}`} legacyBehavior>
       <a>
         {post.title}
         <p className="date">

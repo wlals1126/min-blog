@@ -33,7 +33,7 @@ const Categories = ({ categories, style = {}, aflg }: Props) => {
         categories.map((prev, i) => (
           <div key={i}>
             {aflg ? (
-              <Link href={`/category=${prev.name}`}>
+              <Link href={`/category=${prev.name}`} legacyBehavior>
                 <a>{prev.name}</a>
               </Link>
             ) : (

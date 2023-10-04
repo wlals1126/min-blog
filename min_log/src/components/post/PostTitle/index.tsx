@@ -26,18 +26,18 @@ const PostTitle = ({ id, title, isUser }: Props) => {
   return (
     <p.TitleContainer isUser={isUser}>
       <h1>{title}</h1>
-      {isUser && (
-        <div>
-          <Link href={`/posing/${id}`}>
-            <a>
-              <img src="/pen.svg" alt="error" />
-            </a>
-          </Link>
-          <div onClick={onClickDelete}>
-            <img src="/trash.svg" alt="error" />
-          </div>
-        </div>
-      )}
+			{isUser && (
+				<div>
+					<Link href={`/posting/${id}`}>
+						<a>
+							<img src="/pen.svg" />
+						</a>
+					</Link>
+					<div onClick={onClickDelete}>
+						<img src="/trash.svg" alt="" />
+					</div>
+				</div>
+			)}
     </p.TitleContainer>
   );
 };

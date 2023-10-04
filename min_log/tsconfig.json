@@ -1,0 +1,35 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"sourceMap": true,
+		"lib": ["ES2020", "DOM"],
+		"jsx": "preserve",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"target": "es5",
+		"strict": true,
+		"resolveJsonModule": true,
+		"baseUrl": ".",
+		"downlevelIteration": true,
+		"paths": {
+			"@hooks/*": ["hooks/*"],
+			"@components/*": ["components/*"],
+			"@containers/*": ["containers/*"],
+			"@pages/*": ["pages/*"],
+			"@utils/*": ["utils/*"],
+			"@typings/*": ["typings/*"],
+			"@config/*": ["config/*"],
+			"@styles/*": ["styles/*"],
+			"@store/*": ["store/*"],
+			"@sagas/*": ["sagas/*"],
+			"@reducers/*": ["reducers/*"]
+		},
+		"allowJs": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"isolatedModules": true
+	},
+	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"exclude": ["node_modules"]
+}

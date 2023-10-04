@@ -15,13 +15,11 @@ const AppHeader = () => {
           </a>
         </Link>
         <a.HeaderButtonBox>
-          {user && (
             <Link href="/posting">
               <a.HeaderButton>
                 <img src="/pen.svg" alt="error" />
               </a.HeaderButton>
             </Link>
-          )}
           <Link href="/search" legacyBehavior>
             <a.HeaderButton>
               <img src="search.svg" alt="search_icon" />

@@ -1,2 +1,2 @@
-# min-log
-정적 블로그
+# min-Blog
+Next.js로 제작한 개인 블로그

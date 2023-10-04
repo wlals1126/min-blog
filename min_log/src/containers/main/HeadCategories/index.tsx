@@ -1,6 +1,6 @@
 import React from "react";
 import * as h from "./style";
-import CategoryBlock from "@/components/Main/Caterory";
+import CategoryBlock from "@/components/main/Caterory";
 import { UCategory } from "@/typings/data";
 
 interface HeadCategoriesProps {

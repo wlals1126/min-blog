@@ -2,18 +2,13 @@ import React, { useEffect } from "react";
 import { MainContainer } from "@/styles/Main";
 import HeadCategories from "@/containers/main/HeadCategories";
 import PostCards from "@/containers/main/PostCards";
-import wrapper from "@/store/configureStore";
-import { LOAD_CATEGORIES_REQUEST, LOAD_POSTS_REQUEST } from "@/reducers/posts";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { LOAD_POST_REQUEST } from "@/reducers/post";
 import Head from "next/head";
-import axios from "axios";
 import Error from "next/error";
 import { LoadingBall } from "@/components/layout/LoadingFilter";
-import { LOAD_USER_REQUSET } from "@/reducers/user";
-import { END } from "redux-saga";
-
+import { LOAD_POSTS_REQUEST } from "@/reducers/posts";
 
 interface IndexProps {
   category: string;
@@ -32,22 +27,19 @@ const Index = ({ category }: IndexProps) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const onScroll = () => {
-      if (
-        window.scrollY + document.documentElement.clientHeight >
-        document.documentElement.clientHeight - 10
-      ) {
-        if (!(postsErrorReason || isLoaddingPosts || EndOfPosts)) {
-          dispatch({
-            type: LOAD_POST_REQUEST,
-            payload: {
-              category: category,
-              lastId: posts[posts.length - 1]?.id,
-            },
-          });
-        }
-      }
-    };
+		const onScroll = () => {
+			if (window.scrollY + document.documentElement.clientHeight > document.documentElement.scrollHeight - 10) {
+				if (!(postsErrorReason || isLoaddingPosts || EndOfPosts)) {
+					dispatch({
+						type: LOAD_POSTS_REQUEST,
+						payload: {
+							category: category,
+							lastId: posts[posts.length - 1]?.id,
+						},
+					});
+				}
+			}
+		};
 
     window.addEventListener("scroll", onScroll);
     return () => {
@@ -59,7 +51,7 @@ const Index = ({ category }: IndexProps) => {
     <>
       <Head>
         <meta property="og:title" content="유지민의 개발 블로그" />
-        <meta property="og:url" content="https://ulog.vercel.app" />
+        <meta property="og:url" content="" />
         <meta
           property="og:description"
           content="다양한 경험에 도전하는 개발자 유지민입니다."

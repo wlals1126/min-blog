@@ -1,30 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 
-interface DropImgProps {
-  onPasteImage(file: any): void;
+interface DropImageProps {
+	onPasteImage(file: any): void;
 }
 
-const DropImage: React.FC<DropImgProps> = ({ onPasteImage }) => {
-  const handlePaste = (e: any) => {
-    const { items } = e.clipboardData || e.originalEvent.clipboardData;
-    if (items.length === 0) return;
+const DropImage = ({ onPasteImage }: DropImageProps) => {
+	useEffect(() => {
+		const onPaste = (e: any) => {
+			const { items } = e.clipboardData || e.originalEvent.clipboardData;
+			if (items.length === 0) return;
+			const fileItem = [...items].filter((item) => item.kind === 'file')[0];
+			if (!fileItem || !fileItem.getAsFile) return;
+			const file = fileItem.getAsFile();
+			onPasteImage(file);
+			e.preventDefault();
+		};
 
-    const fileItem = [...items].filter((item) => item.kind === "file")[0];
-    if (!fileItem || !fileItem.getAsFile) return;
+		if (document && document.body) {
+			document.body.addEventListener('paste', onPaste);
+		}
 
-    const file = fileItem.getAsFile();
-    onPasteImage(file);
-    e.preventDefault();
-  };
-
-  useEffect(() => {
-    document.body.addEventListener("paste", handlePaste);
-    return () => {
-      document.body.removeEventListener("paste", handlePaste);
-    };
-  }, [onPasteImage]);
-
-  return <div style={{ width: 0, height: 0 }} />;
+		return () => {
+			if (document && document.body) document.body.removeEventListener('paste', onPaste);
+		};
+	}, []);
+  
+	return <div style={{ width: 0, height: 0 }} />;
 };
 
 export default DropImage;

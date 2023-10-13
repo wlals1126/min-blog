@@ -16,7 +16,7 @@ const AppFooter = () => {
         </a>
         <div>
           <div>
-            <img src="/email.jpg" alt="email_icon" />
+            <img src="/email.svg" alt="email_icon" />
           </div>
           zzzm1n126@gmail.com
         </div>

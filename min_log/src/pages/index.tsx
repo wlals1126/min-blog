@@ -77,6 +77,6 @@ const Index = ({ category }: IndexProps) => {
       )}
     </>
   );
-};
+};  
 
 export default Index;

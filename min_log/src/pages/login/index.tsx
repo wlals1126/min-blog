@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { useRouter } from "next/router";
 import LoadingFilter from "@/components/layout/LoadingFilter";
+import wrapper from "@/store/configureStore";
+import axios from "axios";
+import { END } from "redux-saga";
+import { GetServerSidePropsContext } from "next";
 
 const Login = () => {
   const [username, setUsername] = useInput("");
@@ -60,7 +64,7 @@ const Login = () => {
                   onChange={setPassword}
                 />
               </label>
-            </div>
+            </div> 
             <input type="submit" value="LOGIN" />
           </form>
         </>
@@ -68,5 +72,18 @@ const Login = () => {
     </>
   );
 };
+
+export const getServerSideProps = wrapper.getServerSideProps(async (context: any) => {
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (context.req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  context.store.dispatch({
+    type: LOAD_USER_REQUSET,
+  });
+  context.store.dispatch(END);
+  await context.store.sagaTask.toPromise();
+});
 
 export default Login;

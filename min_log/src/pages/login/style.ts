@@ -14,6 +14,9 @@ export const LoginContainer = styled.div`
 
     img {
       width: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     & > form {
@@ -64,3 +67,10 @@ export const LoginContainer = styled.div`
     }
   }
 `;
+
+export const LoginButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2B2B2B;
+`

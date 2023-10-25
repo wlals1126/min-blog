@@ -7,7 +7,7 @@ import { RootState } from "@/reducers";
 import { LOAD_POST_REQUEST } from "@/reducers/post";
 import Head from "next/head";
 import Error from "next/error";
-import { LoadingBall } from "@/components/layout/LoadingFilter";
+import { LoadingBall } from "../components/layout/LoadingFilter";
 import { LOAD_POSTS_REQUEST } from "@/reducers/posts";
 
 interface IndexProps {

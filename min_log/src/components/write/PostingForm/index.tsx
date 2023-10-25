@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import * as p from "./style";
-import CategoryInput from "@/components/write/CategoryInput";
+import CategoryInput from "../CategoryInput";
 import { useDispatch } from "react-redux";
 import { OPEN_CONFIRM_POST } from "@/reducers/posting";
 import InputImg from "../InputImg";

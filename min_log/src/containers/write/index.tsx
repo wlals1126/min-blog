@@ -3,7 +3,7 @@ import * as c from "./style";
 import { useDispatch, useSelector } from "react-redux";
 import { CLOSE_CONFIRM_POST } from "@/reducers/posting";
 import { WRITE_POST_REQUEST } from "@/reducers/post";
-import SetThumbnail from "@/components/write/SetThumbnail";
+import SetThumbnail from "../../components/write/SetThumbnail";
 import { UPost } from "@/typings/data";
 import { RootState } from "@/reducers";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";

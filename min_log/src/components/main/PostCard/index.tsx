@@ -1,6 +1,6 @@
 import React from 'react';
 import { UCategory } from '@/typings/data';
-import { PostCard, Thumbnail, Contents } from './Style';
+import * as p from "./style";
 import Categories from '@/containers/share/Categories';
 import Link from 'next/link';
 import dayjs from 'dayjs';
@@ -18,18 +18,18 @@ interface PostProps {
 
 const PostCardComponent = ({ post }: PostProps) => {
 	return (
-		<PostCard>
+		<p.PostCard>
 			{post.thumbnail && (
 				<Link href={`/post/${post.id}`}>
-					<Thumbnail>
+					<p.Thumbnail>
 						<div>
 							<div />
 							<img src={post.thumbnail} alt="thumbnail photo" />
 						</div>
-					</Thumbnail>
+					</p.Thumbnail>
 				</Link>
 			)}
-			<Contents thumbnail={post.thumbnail ? true : false}>
+			<p.Contents thumbnail={post.thumbnail ? true : false}>
 				<Link href={`/post/${post.id}`}>
 					<a>
 						<h4>{post.title}</h4>
@@ -38,8 +38,8 @@ const PostCardComponent = ({ post }: PostProps) => {
 					</a>
 				</Link>
 				<Categories categories={post.categoryPosts} style={{ height: '28px' }} aflg={false} />
-			</Contents>
-		</PostCard>
+			</p.Contents>
+		</p.PostCard>
 	);
 };
 

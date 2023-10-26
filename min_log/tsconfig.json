@@ -11,13 +11,12 @@
 	  "moduleResolution": "bundler",
 	  "resolveJsonModule": true,
 	  "isolatedModules": true,
-	  "jsx": "react",
+	  "jsx": "preserve",
 	  "incremental": true,
 	  "paths": {
 		"@/*": ["./src/*"]
-	  }
+	  },
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"]
-  }
-  
+}

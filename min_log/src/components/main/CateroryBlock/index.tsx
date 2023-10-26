@@ -19,8 +19,6 @@ const Block = styled.a<Block>`
     props.current ? "linear-gradient(135deg, #3B87CA, #633094);" : "#fff"};
 `;
 
-
-
 interface Props {
   pageRoot: string;
   name: string;

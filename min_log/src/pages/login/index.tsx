@@ -33,7 +33,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) router.push("/");
-  }, [user]);
+  }, [user, router]);
 
   return (
     <>
@@ -73,17 +73,23 @@ const Login = () => {
   );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(async (context: any) => {
-  const cookie = context.req ? context.req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  if (context.req && cookie) {
-    axios.defaults.headers.Cookie = cookie;
-  }
-  context.store.dispatch({
-    type: LOAD_USER_REQUSET,
-  });
-  context.store.dispatch(END);
-  await context.store.sagaTask.toPromise();
-});
+// export async function getServerSideProps(context: any) {
+//   const cookie = context.req ? context.req.headers.cookie : '';
+//   axios.defaults.headers.Cookie = '';
+//   if (context.req && cookie) {
+//     axios.defaults.headers.Cookie = cookie;
+//   }
+  
+//   context.store.dispatch({
+//     type: LOAD_USER_REQUSET,
+//   });
+  
+//   context.store.dispatch(END);
+//   await context.store.sagaTask.toPromise();
+
+//   return {
+//     props: { },
+//   };
+// }
 
 export default Login;

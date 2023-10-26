@@ -1,34 +1,31 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PostCard = styled.div`
-  width: 290px;
-  border-radius: 0.5rem;
-  box-shadow: 0 0.06875rem 0.1875rem rgba(90, 97, 105, 0.1),
-    0 0.0375rem 0.40625rem rgba(90, 97, 105, 0.1);
-  margin: 20px;
-  overflow: hidden;
-  transition: 0.3s;
-  background: #fff;
+	width: 290px;
+	border-radius: 0.5rem;
+	box-shadow: 0 0.06875rem 0.1875rem rgba(90, 97, 105, 0.1), 0 0.0375rem 0.40625rem rgba(90, 97, 105, 0.1);
+	margin: 20px;
+	overflow: hidden;
+	transition: 0.3s;
+	background: #fff;
 
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0.46875rem 1.1875rem rgba(90, 97, 105, 0.1),
-      0 0.9375rem 0.90625rem rgba(90, 97, 105, 0.1),
-      0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12),
-      0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+	&:hover {
+		transform: scale(1.05);
+		box-shadow: 0 0.46875rem 1.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 0.90625rem rgba(90, 97, 105, 0.1),
+			0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
 
-    img {
-      transform: scale(1.05);
-    }
-  }
+		img {
+			transform: scale(1.05);
+		}
+	}
 
-  @media screen and (max-width: 1000px) {
-    width: calc(50% - 40px);
-  }
+	@media screen and (max-width: 1000px) {
+		width: calc(50% - 40px);
+	}
 
-  @media screen and (max-width: 700px) {
-    width: calc(100% - 40px);
-  }
+	@media screen and (max-width: 700px) {
+		width: calc(100% - 40px);
+	}
 `;
 
 export const Thumbnail = styled.a`
@@ -53,11 +50,11 @@ export const Thumbnail = styled.a`
 	}
 `;
 
-interface Props {
+interface ContentsProps {
 	thumbnail?: boolean;
 }
 
-export const Contents = styled.div<Props>`
+export const Contents = styled.div<ContentsProps>`
 	width: 100%;
 	padding: 1rem;
 

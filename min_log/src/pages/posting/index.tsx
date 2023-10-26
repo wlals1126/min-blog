@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
-import PostingForm from "../../components/write/PostingForm";
+import PostingForm from "@/components/write/PostingForm";
 import * as p from "./style";
 import ConfirmPost from "@/containers/write";
 import useInput from "@/hooks/useInput";
 import axios from "axios";
-import PostBody from "../../components/write/PostBody";
+import PostBody from "@/components/write/PostBody";
 import { UPost } from "@/typings/data";
 import { useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { END } from "redux-saga";
-import LoadingFilter from "../../components/layout/LoadingFilter";
-import DropImage from "../../components/write/DropImg";
+import LoadingFilter from "@/components/layout/LoadingFilter";
+import DropImage from "@/components/write/DropImg";
 import wrapper from "@/store/configureStore";
 
 interface Props {

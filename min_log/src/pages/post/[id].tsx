@@ -2,17 +2,17 @@ import React, { useEffect, useRef } from "react";
 import dayjs from "dayjs";
 import { DateP } from "@/styles/default";
 import Categories from "@/containers/share/Categories";
-import PostBody from "../../../src/components/write/PostBody";
+import PostBody from "@/../src/components/write/PostBody";
 import { useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import Head from "next/head";
 import Error from "../_error";
-import PostTitle from "../../../src/components/post/PostTitle";
-import LoadingFilter from "../../../src/components/layout/LoadingFilter";
+import PostTitle from "@/components/post/PostTitle";
+import LoadingFilter from "@/components/layout/LoadingFilter";
 import styled from "styled-components";
 import { DefaultBox } from "@/styles/default";
-import LinkedPosts from "../../../src/components/post/LinkedPosts";
-import ScrollMoveButtons from "../../../src/components/post/ScrollMoveButtons";
+import LinkedPosts from "@/components/post/LinkedPosts";
+import ScrollMoveButtons from "@/components/post/ScrollMoveButtons";
 import { useRouter } from "next/dist/client/router";
 
 const Container = styled(DefaultBox)`

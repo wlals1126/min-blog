@@ -1,7 +1,7 @@
 import React from "react";
 import { NextPageContext } from "next";
-import AppHeader from "../../../components/layout/AppHeader";
-import AppFooter from "../../../components/layout/AppFooter";
+import AppHeader from "@/components/layout/AppHeader";
+import AppFooter from "@/components/layout/AppFooter";
 import styled from "styled-components";
 import { DefaultBox } from "@/styles/default";
 

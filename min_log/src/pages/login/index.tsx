@@ -5,7 +5,7 @@ import { LOAD_USER_REQUSET, LOGIN_REQUEST } from "@/reducers/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";
 import { useRouter } from "next/router";
-import LoadingFilter from "../../components/layout/LoadingFilter";
+import LoadingFilter from "@/components/layout/LoadingFilter";
 import wrapper from "@/store/configureStore";
 import axios from "axios";
 import { END } from "redux-saga";

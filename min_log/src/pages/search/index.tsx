@@ -1,4 +1,4 @@
-import { LoadingBall } from "../../components/layout/LoadingFilter";
+import { LoadingBall } from "@/components/layout/LoadingFilter";
 import PostCards from "@/containers/main/PostCards";
 import useInput from "@/hooks/useInput";
 import { RootState } from "@/reducers";

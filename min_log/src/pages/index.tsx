@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { MainContainer } from "@/styles/Main";
-import HeadCategories from "@/containers/main/HeadCategories";
+import HeadCategories from "@/containers/main/CategoryBlock";
 import PostCards from "@/containers/main/PostCards";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/reducers";

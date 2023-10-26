@@ -1,6 +1,6 @@
 import React from 'react';
 import { UCategory } from '@/typings/data';
-import { PostCard, Thumbnail, Contents } from './style';
+import { PostCard, Thumbnail, Contents } from './Style';
 import Categories from '@/containers/share/Categories';
 import Link from 'next/link';
 import dayjs from 'dayjs';

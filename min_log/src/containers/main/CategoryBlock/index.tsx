@@ -1,9 +1,9 @@
 import React from "react";
 import * as h from "./style";
-import CategoryBlock from "@/components/Main/CateroryBlock";
+import CategoryBlock from "@/components/main/CateroryBlock";
 import { UCategory } from "@/typings/data";
 
-interface HeadCategoriesProps {
+interface Props {
   category: string;
   pageRoot: string;
   Category?: UCategory[];
@@ -15,7 +15,7 @@ const HeadCategories = ({
   pageRoot,
   Category = [],
   postNum = 0,
-}: HeadCategoriesProps) => {
+}: Props) => {
   return (
     <h.CategoryContainer>
       <CategoryBlock

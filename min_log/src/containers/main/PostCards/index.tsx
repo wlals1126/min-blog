@@ -1,5 +1,5 @@
 import React from "react";
-import PostCard from "@/components/main/PostCard";
+import PostCard from "@/components/Main/PostCard";
 import * as p from "./style";
 import { UPost } from "@/typings/data";
 

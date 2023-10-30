@@ -73,23 +73,23 @@ const Login = () => {
   );
 };
 
-// export async function getServerSideProps(context: any) {
-//   const cookie = context.req ? context.req.headers.cookie : '';
-//   axios.defaults.headers.Cookie = '';
-//   if (context.req && cookie) {
-//     axios.defaults.headers.Cookie = cookie;
-//   }
+export async function getServerSideProps(context: { req: { headers: { cookie: any; }; }; store: { dispatch: (arg0: { type: string; }) => void; sagaTask: { toPromise: () => any; }; }; }) {
+  const cookie = context.req ? context.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (context.req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
   
-//   context.store.dispatch({
-//     type: LOAD_USER_REQUSET,
-//   });
+  context.store.dispatch({
+    type: LOAD_USER_REQUSET,
+  });
   
-//   context.store.dispatch(END);
-//   await context.store.sagaTask.toPromise();
+  context.store.dispatch(END);
+  await context.store.sagaTask.toPromise();
 
-//   return {
-//     props: { },
-//   };
-// }
+  return {
+    props: { },
+  };
+}
 
 export default Login;

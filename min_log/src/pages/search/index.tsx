@@ -105,25 +105,54 @@ const Search = ({ search }: SearchProps) => {
   );
 };
 
-export async function getServerSideProps(context: { req: { headers: { cookie: any; }; }; store: { dispatch: (arg0: { type: any; payload?: { search: any; }; }) => void; sagaTask: { toPromise: () => any; }; }; query: string; }) {
-	const cookie = context.req ? context.req.headers.cookie : '';
-	axios.defaults.headers.Cookie = '';
-	if (context.req && cookie) {
-		axios.defaults.headers.Cookie = cookie;
-	}
-	context.store.dispatch({
-		type: LOAD_USER_REQUSET,
-	});
-	if (context.query.search)
-		context.store.dispatch({
-			type: LOAD_SEARCH_REQUEST,
-			payload: {
-				search: context.query.search,
-			},
-		});
-	context.store.dispatch(END);
-	await context.store.sagaTask.toPromise();
-	return { props: { search: context.query.search ? context.query.search : '' } };
-};
+// export async function getServerSideProps(context: { req: { headers: { cookie: any; }; }; store: { dispatch: (arg0: { type: any; payload?: { search: any; }; }) => void; sagaTask: { toPromise: () => any; }; }; query: string; }) {
+// 	const cookie = context.req ? context.req.headers.cookie : '';
+// 	axios.defaults.headers.Cookie = '';
+// 	if (context.req && cookie) {
+// 		axios.defaults.headers.Cookie = cookie;
+// 	}
+// 	context.store.dispatch({
+// 		type: LOAD_USER_REQUSET,
+// 	});
+// 	if (context.query.search)
+// 		context.store.dispatch({
+// 			type: LOAD_SEARCH_REQUEST,
+// 			payload: {
+// 				search: context.query.search,
+// 			},
+// 		});
+// 	context.store.dispatch(END);
+// 	await context.store.sagaTask.toPromise();
+// 	return { props: { search: context.query.search ? context.query.search : '' } };
+// };
+
+export async function getServerSideProps(context: { req: any; store: any; query: any; }) {
+  const { req, store, query } = context;
+
+  const cookie = req ? req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (req && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+
+  store.dispatch({ type: LOAD_USER_REQUSET });
+
+  if (query.search) {
+    store.dispatch({
+      type: LOAD_SEARCH_REQUEST,
+      payload: {
+        search: query.search,
+      },
+    });
+  }
+
+  await store.sagaTask.toPromise();
+
+  return {
+    props: {
+      search: query.search || '',
+    },
+  };
+}
 
 export default Search;

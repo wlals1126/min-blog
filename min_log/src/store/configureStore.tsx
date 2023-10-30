@@ -1,21 +1,15 @@
-import { applyMiddleware, createStore, compose, StoreEnhancerStoreCreator } from "redux";
+import { applyMiddleware, createStore, compose } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from 'redux-saga';
 import { createWrapper } from "next-redux-wrapper";
 import reducers from "../reducers";
 import sagas from "../sagas";
 
-const sagaMiddleware = createSagaMiddleware();
-
 declare module "redux" {
   export interface Store {
     sagaTask: any;
   }
 }
-
-const store = createStore(reducers as any, enhancer);
-sagaMiddleware.run(sagas);
-store.sagaTask = sagaMiddleware.run(sagas);
 
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware();
@@ -34,7 +28,3 @@ const wrapper = createWrapper(configureStore, {
 });
 
 export default wrapper;
-function enhancer(next: StoreEnhancerStoreCreator<{}, {}>): StoreEnhancerStoreCreator<unknown, unknown> {
-  throw new Error("Function not implemented.");
-}
-

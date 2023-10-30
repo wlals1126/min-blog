@@ -135,10 +135,10 @@ export async function getServerSideProps(context: { req: any; store: any; query:
     axios.defaults.headers.Cookie = cookie;
   }
 
-  store.dispatch({ type: LOAD_USER_REQUSET });
+  context.store.dispatch({ type: LOAD_USER_REQUSET });
 
   if (query.search) {
-    store.dispatch({
+    context.store.dispatch({
       type: LOAD_SEARCH_REQUEST,
       payload: {
         search: query.search,

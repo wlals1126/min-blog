@@ -115,7 +115,7 @@ export async function getServerSideProps(context: { req: any; store: any; query:
     axios.defaults.headers.Cookie = cookie;
   }
 
-  store.dispatch({ type: LOAD_USER_REQUSET });
+  context.store.dispatch({ type: LOAD_USER_REQUSET });
 
   await store.sagaTask.toPromise();
 

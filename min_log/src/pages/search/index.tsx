@@ -3,12 +3,15 @@ import PostCards from "@/containers/main/PostCards";
 import useInput from "@/hooks/useInput";
 import { RootState } from "@/reducers";
 import { LOAD_SEARCH_REQUEST } from "@/reducers/posts";
+import { LOAD_USER_REQUSET } from "@/reducers/user";
 import { MainContainer, SearchInput } from "@/styles/Main";
+import axios from "axios";
 import Error from "next/error";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { END } from "redux-saga";
 
 interface SearchProps {
   search: string;
@@ -100,6 +103,27 @@ const Search = ({ search }: SearchProps) => {
       </MainContainer>
     </>
   );
+};
+
+export async function getServerSideProps(context: { req: { headers: { cookie: any; }; }; store: { dispatch: (arg0: { type: any; payload?: { search: any; }; }) => void; sagaTask: { toPromise: () => any; }; }; query: string; }) {
+	const cookie = context.req ? context.req.headers.cookie : '';
+	axios.defaults.headers.Cookie = '';
+	if (context.req && cookie) {
+		axios.defaults.headers.Cookie = cookie;
+	}
+	context.store.dispatch({
+		type: LOAD_USER_REQUSET,
+	});
+	if (context.query.search)
+		context.store.dispatch({
+			type: LOAD_SEARCH_REQUEST,
+			payload: {
+				search: context.query.search,
+			},
+		});
+	context.store.dispatch(END);
+	await context.store.sagaTask.toPromise();
+	return { props: { search: context.query.search ? context.query.search : '' } };
 };
 
 export default Search;

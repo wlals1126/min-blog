@@ -14,6 +14,7 @@ import { END } from "redux-saga";
 import LoadingFilter from "@/components/layout/LoadingFilter";
 import DropImage from "@/components/write/DropImg";
 import wrapper from "@/store/configureStore";
+import { LOAD_USER_REQUSET } from "@/reducers/user";
 
 interface Props {
   post: UPost | null;
@@ -89,6 +90,20 @@ const Posting = ({ post }: Props) => {
       <ConfirmPost title={title} post={post} />
     </>
   );
+};
+
+export async function getServerSideProps(context: { req: { headers: { cookie: any; }; }; store: { dispatch: (arg0: { type: string; }) => void; sagaTask: { toPromise: () => any; }; }; query: { category: any; }; }) {
+	const cookie = context.req ? context.req.headers.cookie : '';
+	axios.defaults.headers.Cookie = '';
+	if (context.req && cookie) {
+		axios.defaults.headers.Cookie = cookie;
+	}
+	context.store.dispatch({
+		type: LOAD_USER_REQUSET,
+	});
+	context.store.dispatch(END);
+	await context.store.sagaTask.toPromise();
+	return { props: { category: context.query.category ? context.query.category : '' } };
 };
 
 export default Posting;
